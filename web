@@ -1,79 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page Example</title>
-    <link rel="stylesheet" href="styles.css"> <!-- You can create a CSS file and link it here -->
-</head>
-<body>
-    <header class="header">
-        <nav class="navbar">
-            <ul class="nav-list">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+class HairAppointmentApp:
+    def __init__(self):
+        self.appointments = {}
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to Our Website</h1>
-            <p>Discover amazing features and more!</p>
-            <a href="#features" class="btn">Learn More</a>
-        </div>
-    </section>
+    def book_appointment(self, date, time, customer_name):
+        appointment_key = f"{date} {time}"
+        if appointment_key in self.appointments:
+            print(f"Sorry, {appointment_key} is already booked.")
+        else:
+            self.appointments[appointment_key] = customer_name
+            print(f"Appointment booked for {customer_name} on {appointment_key}.")
 
-    <section class="features" id="features">
-        <h2>Features</h2>
-        <div class="feature">
-            <h3>Feature 1</h3>
-            <p>Description of feature 1.</p>
-        </div>
-        <div class="feature">
-            <h3>Feature 2</h3>
-            <p>Description of feature 2.</p>
-        </div>
-        <div class="feature">
-            <h3>Feature 3</h3>
-            <p>Description of feature 3.</p>
-        </div>
-    </section>
+    def display_appointments(self):
+        if not self.appointments:
+            print("No appointments scheduled.")
+        else:
+            for appointment, customer_name in self.appointments.items():
+                print(f"{appointment}: {customer_name}")
 
-    <section class="pricing" id="pricing">
-        <h2>Pricing</h2>
-        <div class="price-card">
-            <h3>Plan 1</h3>
-            <p>$10/month</p>
-            <a href="#" class="btn">Get Started</a>
-        </div>
-        <div class="price-card">
-            <h3>Plan 2</h3>
-            <p>$20/month</p>
-            <a href="#" class="btn">Get Started</a>
-        </div>
-        <div class="price-card">
-            <h3>Plan 3</h3>
-            <p>$30/month</p>
-            <a href="#" class="btn">Get Started</a>
-        </div>
-    </section>
+if __name__ == "__main__":
+    app = HairAppointmentApp()
 
-    <section class="contact" id="contact">
-        <h2>Contact Us</h2>
-        <form>
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <textarea placeholder="Message"></textarea>
-            <button type="submit" class="btn">Submit</button>
-        </form>
-    </section>
+    while True:
+        print("\nMenu:")
+        print("1. Book Appointment")
+        print("2. Display Appointments")
+        print("3. Exit")
 
-    <footer class="footer">
-        <p>&copy; 2023 Your Company</p>
-    </footer>
+        choice = input("Enter your choice: ")
 
-    <script src="script.js"></script> <!-- You can create a JavaScript file and link it here -->
-</body>
-</html>
+        if choice == "1":
+            date = input("Enter date (e.g., YYYY-MM-DD): ")
+            time = input("Enter time (e.g., HH:MM): ")
+            customer_name = input("Enter your name: ")
+            app.book_appointment(date, time, customer_name)
+        elif choice == "2":
+            app.display_appointments()
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice. Please try again.")
